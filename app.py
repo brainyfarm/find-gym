@@ -8,9 +8,11 @@ def home_page():
     return render_template('index.html', title='Gym Finder')
 
 
-@app.route('/findgym', methods=["POST"])
-def find_gym():
-    return 'Find the fucking gym'    
+@app.route('/find', methods=["GET", "POST"])
+def find_gyms():
+    if request.method == 'POST':
+        location = request.form["location"]
+        return "Searching for gyms around " + location
 
 if __name__ == "__main__":
     app.run(debug=True)

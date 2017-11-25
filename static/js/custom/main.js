@@ -30,17 +30,16 @@ $(document).ready(() => {
     getUserLocation.then((locationData) => {
         if(locationData) {
             //console.log(locationData)
-            $('#user-location').text(JSON.stringify(locationData));
+            //$('#user-location').text(JSON.stringify(locationData));
             const geocoder = new google.maps.Geocoder();
             const latLng = new google.maps.LatLng(locationData.lat, locationData.lon);
          
             if (geocoder) {
-               geocoder.geocode({ 'latLng': latLng}, function (results, status) {
+               geocoder.geocode({ 'latLng': latLng}, (results, status) => {
                   if (status == google.maps.GeocoderStatus.OK) {
-                     //console.log(results[0].formatted_address);
                      console.log(results);
-                     $('#search-location').val(results[1].formatted_address)
-                     $('#user-location').text(results[1].formatted_address);                     
+                     $('#search-location').val(results[0].formatted_address)
+                     $('#user-location').text(results[4].formatted_address);                     
                   }
                   else {
                      console.log("Geocoding failed: " + status);
