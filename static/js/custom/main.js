@@ -37,6 +37,7 @@ $(document).ready(() => {
             if (geocoder) {
                geocoder.geocode({ 'latLng': latLng}, (results, status) => {
                   if (status == google.maps.GeocoderStatus.OK) {
+                     console.log(locationData);
                      console.log(results);
                      $('#search-location').val(results[0].formatted_address)
                      $('#user-location').text(results[4].formatted_address);                     
