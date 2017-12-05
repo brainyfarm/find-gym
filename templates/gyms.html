@@ -9,14 +9,14 @@
         <ul class="list-group" id="gym-list">
             <li class="list-group-item">
                 <div class="gym-item {{gym['place_id']}}"> 
-                    <h2 class="text-left text-primary"> <a href='/more/{{gym["place_id"]}}'> {{ gym["name"] }} </a></h2>
+                    <h2 class="text-left text-primary"> <a href='/gym/more/{{gym["place_id"]}}'> {{ gym["name"] }} </a></h2>
                     <h3> {{ gym["vicinity"] }}</h3>
                     {% if gym["opening_hours"] %} 
                         {% if gym['opening_hours']['open_now'] %}
                             <p class="text-success"> CURRENTLY OPEN </p>
                         {% endif %}
                     {% endif %}
-                    <a href='/more/{{gym["place_id"]}}' class="btn btn-info"> More Info </a>
+                    <a href='/gym/more/{{gym["place_id"]}}' class="btn btn-info"> More Info </a>
                 </div>
             </li>
         </ul>
