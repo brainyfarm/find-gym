@@ -53,7 +53,11 @@ $(document).ready(() => {
         getLocationFromIp.then((location) => {
             $('#user-location').text(location);
         })
-    })
+    });
+
+    $('#gym-list').on('load', () => {
+        console.log('Loaded the gym');
+    });
 });
 
 

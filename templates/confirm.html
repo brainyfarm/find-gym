@@ -1,0 +1,63 @@
+
+{% extends 'base.html' %}
+{% block title %}
+   Booking Success
+{% endblock %} 
+
+{% block content %}
+<section class="main-section " id="Portfolio">
+        <div class="container">
+            <h3 class="text-success text-center">APPOINTMENT SCHEDULED!</h3>
+            <!-- <h6>Here are your details </h6> -->
+            <center>
+
+
+                <p> NAME </p>
+                <p>                    
+                    <h2>
+                            {{ booking_details['name'].upper()}} 
+                    </h2>
+                </p>
+                
+                <br />
+
+                <p> PHONE </p>
+                <p>                    
+                    <h2>
+                            {{ booking_details['phone_number'].upper()}} 
+                        </h2>
+                </p>
+                
+                <br />
+
+
+                <p> EMAIL </p>
+                <p>                    
+                    <h2>
+                            {{ booking_details['email'].upper()}} 
+                    </h2>
+                </p>
+                
+                <br />
+
+                <p> DATE </p>
+                <p>                    
+                    <h2>
+                            {{ booking_details['date_time'].upper()}} 
+                    </h2>
+                </p>
+                
+                <br />
+
+                            <br />
+                  
+                            <a href="javascript:history.back()" class="btn btn-lg  btn-default"> BACK</a>
+                            
+                            <a class="btn btn-lg btn-default" onclick="window.print()"> PRINT</a>
+            </center>
+
+        </div>
+    </section>
+
+{% endblock %}
+
