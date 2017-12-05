@@ -27,10 +27,9 @@ const getLocationFromIp = new Promise((resolve, reject) => {
 });
 
 $(document).ready(() => {
+    console.log('Getting here for sure')
     getUserLocation.then((locationData) => {
         if(locationData) {
-            //console.log(locationData)
-            //$('#user-location').text(JSON.stringify(locationData));
             const geocoder = new google.maps.Geocoder();
             const latLng = new google.maps.LatLng(locationData.lat, locationData.lon);
          
@@ -55,8 +54,15 @@ $(document).ready(() => {
         })
     });
 
-    $('#gym-list').on('load', () => {
-        console.log('Loaded the gym');
+  
+    $('#search-location').on('keyup', (e) => {
+        const currentlyEnteredLocation = $('#search-location').val();
+
+        $('#user-location').text(currentlyEnteredLocation); 
+    });
+
+    $('#search-location').on('focus', () => {
+        const currentlyEnteredLocation = $('#search-location').val('');        
     });
 });
 
