@@ -15,8 +15,6 @@
       <script>
         const latitude = parseFloat("{{gym['result']['geometry']['location']['lat']}}");
         const longitude = parseFloat("{{gym['result']['geometry']['location']['lng']}}");        
-        const currentUrl = document.location.href.split('/');
-        const placeId = currentUrl[currentUrl.length -1];
         function drawMap(lat, lng) {
           var center = { lat, lng };
           var map = new google.maps.Map(document.getElementById('map'), {
@@ -71,7 +69,7 @@
                         <span>
                           {% for day in gym['result']['opening_hours']['weekday_text'] %}
                         
-                          <strong>{{ day }}</strong> <br >
+                          <strong>{{ day }}</strong> <br />
                         {% endfor %}
                         </span>
                       </div>
@@ -111,7 +109,6 @@
               <script>
                   $(function () {
                       $('#datetime').datetimepicker({
-                        // todayBtn: true                      
                       });
                     });
                 </script>

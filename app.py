@@ -1,11 +1,9 @@
 import requests
-from datetime import datetime
-from flask import Flask, render_template, url_for, request, redirect , jsonify
+from flask import Flask, render_template, url_for, request
 
 API_KEY = 'AIzaSyC-untCAlzyRtrAuJ6ShicN0aHCHMD94jg'
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def home_page():
@@ -13,10 +11,10 @@ def home_page():
 
 @app.route('/gym')
 def gym_page():
-    return render_template('index.html', title='Gym Finder')
+    return render_template('index.html')
 
 
-@app.route('/gym/find', methods=["GET", "POST"])
+@app.route('/gym/find', methods=["POST"])
 def find_gyms():
     if request.method == 'POST':
         location = request.form["location"]
@@ -33,6 +31,7 @@ def find_gyms():
 def gym_info(place_id):
     if request.method == 'GET':
         place_api_url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + place_id + '&key=AIzaSyDHHLWzJzlZZFDye9JbxiCu4RXei_bzMbE'
+        print place_api_url
         place_details_response = requests.get(place_api_url).json()
         return render_template('gym.html', gym=place_details_response)
     if request.method == 'POST':
@@ -41,9 +40,7 @@ def gym_info(place_id):
         booking_details['phone_number'] = request.form["phone"]
         booking_details['email'] = request.form['email']
         booking_details['date_time'] = request.form['date_time']
-        place_api_url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + place_id + '&key=AIzaSyDHHLWzJzlZZFDye9JbxiCu4RXei_bzMbE'
-        place_details_response = requests.get(place_api_url).json()
         return render_template('confirm.html', booking_details=booking_details)
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run()
