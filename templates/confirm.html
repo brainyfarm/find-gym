@@ -7,60 +7,50 @@
 {% block content %}
 <section class="main-section " id="Portfolio">
         <div class="container">
+            <center>
             <h3 class="text-success text-center">APPOINTMENT SCHEDULED!</h3>
                          
                
             
             <br />
             <!-- <h6>Here are your details </h6> -->
-            <center>
                 <span>
                     Your booking ID is: <a href="/session/confirm/{{booking_details['id_string']}}">{{ booking_details['id_string'] }} </a>
                 </span>
-                <p> NAME </p>
-                <p>                    
-                    <h2>
-                            {{ booking_details['name'].upper()}} 
-                    </h2>
-                </p>
-                
-                <br />
-
-                <p> PHONE </p>
-                <p>                    
-                    <h2>
-                            {{ booking_details['phone_number'].upper()}} 
-                        </h2>
-                </p>
-                
-                <br />
-
-
-                <p> EMAIL </p>
-                <p>                    
-                    <h2>
-                            {{ booking_details['email'].upper()}} 
-                    </h2>
-                </p>
-                
-                <br />
-
-                <p> DATE </p>
-                <p>                    
-                    <h2>
-                            {{ booking_details['date_time'].upper()}} 
-                    </h2>
-                </p>
-                
-                <br />
+                        <p>
+                            <span class="left">
+                                <strong>NAME: </strong>
+                                {{ booking_details['name'].upper()}} 
+                            </span>
+                        </p>
+                        <br />
+                        <p>
+                            <span class="left">
+                                <strong>PHONE NUMBER: </strong> 
+                                {{ booking_details['phone_number']}}                                 
+                            </span>
+                        </p>
+                        <br />
+                        <p>
+                            <span class="left">
+                                <strong>EMAIL: </strong>
+                                {{ booking_details['email'].upper()}}
+                            </span>
+                        </p>
+                        <br />
+                        <p>
+                            <span class="left">
+                                <strong>DATE: </strong>
+                                {{ booking_details['date_time'].upper()}}  
+                            </span>
+                        </p>
 
                             <br />
                   
                             <a href="javascript:history.back()" class="btn btn-lg  btn-default"> BACK</a>
                             
                             <a class="btn btn-lg btn-default" onclick="window.print()"> PRINT</a>
-            </center>
-
+                    </center>
         </div>
     </section>
 
