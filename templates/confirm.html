@@ -1,58 +1,80 @@
-
-{% extends 'base.html' %}
-{% block title %}
-   Booking Success
-{% endblock %} 
-
-{% block content %}
-<section class="main-section " id="Portfolio">
-        <div class="container">
-            <center>
-            <h3 class="text-success text-center">APPOINTMENT SCHEDULED!</h3>
-                         
-               
+ {% extends 'base.html' %} {% block title %} Booking Success {% endblock %} {% block content %}
+<section class=" " id="">
+    <div class="container">
             
-            <br />
-            <!-- <h6>Here are your details </h6> -->
-                <span>
-                    Your booking ID is: <a href="/session/confirm/{{booking_details['id_string']}}">{{ booking_details['id_string'] }} </a>
-                </span>
-                        <p>
-                            <span class="left">
-                                <strong>NAME: </strong>
-                                {{ booking_details['name'].upper()}} 
-                            </span>
-                        </p>
-                        <br />
-                        <p>
-                            <span class="left">
-                                <strong>PHONE NUMBER: </strong> 
-                                {{ booking_details['phone_number']}}                                 
-                            </span>
-                        </p>
-                        <br />
-                        <p>
-                            <span class="left">
-                                <strong>EMAIL: </strong>
-                                {{ booking_details['email'].upper()}}
-                            </span>
-                        </p>
-                        <br />
-                        <p>
-                            <span class="left">
-                                <strong>DATE: </strong>
-                                {{ booking_details['date_time'].upper()}}  
-                            </span>
-                        </p>
+        <div class="row">
+            <div class="col-lg-7 col-sm-offset-3 body-part">            
+                <h1 class="text-success"> APPOINTMENT CONFIRMED! </h1>
 
-                            <br />
-                  
-                            <a href="javascript:history.back()" class="btn btn-lg  btn-default"> BACK</a>
+                <div class="text-success">
+                </div>
+                <div class="">
+                <div class="contact-info-box phone clearfix">
+
+                    
+                             
+                        </div>
+                        <div class="contact-info-box phone clearfix">                                
+                                <h3>
+                                    <i class="fa-user"></i>Name:</h3>
+                                <span> {{ booking_details['name'].upper()}} </span>
+                            </div>
+
+
+                    <div class="contact-info-box phone clearfix">
+                        <h3>
+                            <i class="fa-phone"></i>Phone:</h3>
+                        <span> {{ booking_details['phone_number']}}  </span>
+                    </div>
+                    <div class="contact-info-box email clearfix">
+                        <h3>
+                            <i class="fa-pencil"></i>email:</h3>
+                        <span> {{ booking_details['email'].upper()}} </span>
+                    </div>
+
+                    <div class="contact-info-box hours clearfix">
+                        <h3>
+                            <i class="fa-clock-o"></i>DATE:</h3>
+                        <span>
+                            {{ booking_details['date_time'].upper()}}    
+                        </span>                              
+                        
+                    </div>
+
+                    <div class="contact-info-box hours clearfix">
+                            <h3>
+                                <i class="fa-globe"></i>BOOKING ID:</h3>
+                            <span>
+                            <a href="/session/confirm/{{booking_details['id_string']}}">{{ booking_details['id_string'] }} <i class="fa-external-link"></i></a>                            </span>                              
                             
-                            <a class="btn btn-lg btn-default" onclick="window.print()"> PRINT</a>
-                    </center>
+                        </div>
+
+
+                    <div class="contact-info-box hours clearfix">
+                                <a href="javascript:history.back()" class="btn btn-lg btn-primary back-info"> BACK </a>
+                                <a class="btn btn-lg btn-warning print-btn" onclick="window.print()"> PRINT </a>
+                        </div>
+            
+                </div>
+
+            </div>
         </div>
-    </section>
+
+        <style>
+            .contact-info-box h3 {
+                width: auto;
+                margin-right: 20px;
+            }
+
+            .print-btn {
+                margin-left: 10px;
+            }
+
+            .back-btn {
+                margin-right: 15px;
+            }
+        </style>
+    </div>
+</section>
 
 {% endblock %}
-
