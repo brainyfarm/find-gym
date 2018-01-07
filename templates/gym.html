@@ -89,6 +89,8 @@
               <h2> Book a Session </h2>              
 						<form action="" method="POST" role="form" class="">
 							<div class="form-group">
+                <input type="text" name="gym" id="gym" value="{{gym['result']['name']}}" style="display:none">
+
 								<input type="text" name="name" class="form-control input-text" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
 								<div class="validation"></div>
               </div>

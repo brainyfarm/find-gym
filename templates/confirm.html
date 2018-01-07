@@ -5,20 +5,18 @@
         <div class="row">
             <div class="col-lg-7 col-sm-offset-3 body-part">            
                 <h1 class="text-success"> APPOINTMENT CONFIRMED! </h1>
-
-                <div class="text-success">
-                </div>
                 <div class="">
-                <div class="contact-info-box phone clearfix">
+                    <div class="contact-info-box phone clearfix">
 
-                    
-                             
-                        </div>
+                    <h3>
+                        <i class="fa-building-o"></i> Gym Name: </h3>
+                        <span> {{booking_details['gym']}} </span>
+                    </div>
                         <div class="contact-info-box phone clearfix">                                
                                 <h3>
                                     <i class="fa-user"></i>Name:</h3>
                                 <span> {{ booking_details['name'].upper()}} </span>
-                            </div>
+                        </div>
 
 
                     <div class="contact-info-box phone clearfix">
@@ -36,9 +34,8 @@
                         <h3>
                             <i class="fa-clock-o"></i>DATE:</h3>
                         <span>
-                            {{ booking_details['date_time'].upper()}}    
+                            {{ booking_details['date_time'] }}    
                         </span>                              
-                        
                     </div>
 
                     <div class="contact-info-box hours clearfix">

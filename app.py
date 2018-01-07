@@ -2,9 +2,12 @@ import requests
 import pyrebase
 from hashids import Hashids
 from flask import Flask, render_template, url_for, request, redirect
+from flask_mail import Mail, Message
+from lib import message_builder
+
 
 hashid_salt = 'impossible to guess'
-hashids = Hashids(salt=hashid_salt, min_length=4)
+hashids = Hashids(salt = hashid_salt, min_length = 4)
 
 
 API_KEY = 'AIzaSyC-untCAlzyRtrAuJ6ShicN0aHCHMD94jg'
@@ -20,16 +23,34 @@ firebase = pyrebase.initialize_app(firebase_config)
 db = firebase.database()
 
 app = Flask(__name__)
+mail = Mail(app)
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'brainyfarm@gmail.com'
+app.config['MAIL_PASSWORD'] = 'qjxkbthgqptcvywt'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+
+
+def sendmail(mail, msg_subject, msg_sender, msg_recipients, message_html):
+    message = Message(msg_subject, sender = msg_sender, recipients = msg_recipients)
+    message.html = message_html
+    mail.send(message)
+    return True
+
 
 @app.route('/')
 def home_page():
+    #print message_builder.user_message()
     return 'Nothing Here for now'
 
 @app.route('/gym')
 def gym_page():
     return render_template('index.html')
 
-@app.route('/gym/find', methods=["POST"])
+@app.route('/gym/find', methods = ["POST"])
 def find_gyms():
     if request.method == 'POST':
         location = request.form["location"]
@@ -62,12 +83,22 @@ def gym_info(place_id):
         booking_confirm_url = 'session/confirm/' + booking_id_string
         booking_details = dict()
         booking_details['id'] = int(new_booking_id)
+        booking_details['gym'] = request.form["gym"]
         booking_details['name'] = request.form["name"]
         booking_details['phone_number'] = request.form["phone"]
         booking_details['email'] = request.form['email']
         booking_details['date_time'] = request.form['date_time']
         booking_details['id_string'] = booking_id_string
         new_booking_ref.set(booking_details)
+        user_message = message_builder.user_message(booking_details)
+        gym_message = message_builder.gym_message(booking_details)
+
+        # Send a mail to user to show them a confirmation of their booking.
+        sendmail(mail, user_message['subject'], 'brainyfarm@gmail.com', [booking_details['email']], user_message['html'])
+        
+        # Send a message to the gym to let them know the user has scheduled a session
+        sendmail(mail, gym_message['subject'], 'brainyfarm@gmail.com', ['brainyfarm@gmail.com'], gym_message['html'])
+        
         return redirect(booking_confirm_url)
 
 
@@ -79,6 +110,29 @@ def display_confirmation(booking_id):
     booking_details = dict(result)
     return render_template('confirm.html', booking_details=booking_details)
 
+@app.route('/session/user_cancel/<booking_id>')
+def user_delete_and_confirm(booking_id):
+    real_booking_id = hashids.decode(booking_id)[0]
+    booking_ref = db.child("bookings").child(real_booking_id)
+    booking_details = booking_ref.get().val()
+    booking_ref.remove()
+    user_cancel_message = message_builder.user_cancel_message(booking_details)
+    user_cancel_confirm_message = message_builder.user_cancel_confirm(booking_details)
+    sendmail(mail, user_cancel_message['subject'], 'brainyfarm@gmail.com', ['brainyfarm@gmail.com'], user_cancel_message['html'])
+    sendmail(mail, user_cancel_confirm_message['subject'], 'brainyfarm@gmail.com', [booking_details['email']], user_cancel_confirm_message['html'])
+    return render_template('confirm_delete.html', booking_details=booking_details)
 
+@app.route('/session/gym_cancel/<booking_id>')
+def gym_delete_and_confirm(booking_id):
+    real_booking_id = hashids.decode(booking_id)[0]
+    booking_ref = db.child("bookings").child(real_booking_id)
+    booking_details = booking_ref.get().val()
+    booking_ref.remove()
+    gym_cancel_message = message_builder.gym_cancel_message(booking_details)
+    gym_cancel_confirm_message = message_builder.gym_cancel_confirm(booking_details)
+    sendmail(mail, gym_cancel_message['subject'], 'brainyfarm@gmail.com', [booking_details['email']], gym_cancel_message['html'])
+    sendmail(mail, gym_cancel_confirm_message['subject'], 'brainyfarm@gmail.com', ['brainyfarm@gmail.com'], gym_cancel_confirm_message['html'])
+    return render_template('confirm_delete.html', booking_details = booking_details)
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
+
