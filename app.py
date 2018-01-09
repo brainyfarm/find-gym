@@ -13,11 +13,13 @@ hashids = Hashids(salt = hashid_salt, min_length = 4)
 API_KEY = 'AIzaSyC-untCAlzyRtrAuJ6ShicN0aHCHMD94jg'
 
 firebase_config = {
-  "apiKey": "AIzaSyDIAu2zRXqdppauyZSK-N7aQlYnPcJpAJE",
-  "authDomain": "gym-finder-29327.firebaseapp.com",
-  "databaseURL": "https://gym-finder-29327.firebaseio.com",
-  "storageBucket": ""
+  "apiKey": "AIzaSyDrw2z11cWBjIVNWYKYcLCdjR0wCJ3w7HY",
+  "authDomain": "gym-finder-78813.firebaseapp.com",
+  "databaseURL": "https://gym-finder-78813.firebaseio.com",
+  "storageBucket": "gym-finder-78813.appspot.com"
 }
+
+gyms_email_address = 'thisappemail@gmail.com'
 
 firebase = pyrebase.initialize_app(firebase_config)
 db = firebase.database()
@@ -27,8 +29,8 @@ mail = Mail(app)
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'cynthianfly@gmail.com'
-app.config['MAIL_PASSWORD'] = 'xwswwboyjnquxgoe'
+app.config['MAIL_USERNAME'] = 'findgym2@gmail.com'
+app.config['MAIL_PASSWORD'] = 'uaplwjtchijsoknk'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -94,10 +96,10 @@ def gym_info(place_id):
         gym_message = message_builder.gym_message(booking_details)
 
         # Send a mail to user to show them a confirmation of their booking.
-        sendmail(mail, user_message['subject'], 'cynthianfly@gmail.com', [booking_details['email']], user_message['html'])
+        sendmail(mail, user_message['subject'], 'findgym2@gmail.com', [booking_details['email']], user_message['html'])
         
         # Send a message to the gym to let them know the user has scheduled a session
-        sendmail(mail, gym_message['subject'], 'cynthianfly@gmail.com', ['brainyfarm@gmail.com'], gym_message['html'])
+        sendmail(mail, gym_message['subject'], 'findgym2@gmail.com', [gyms_email_address], gym_message['html'])
         
         return redirect(booking_confirm_url)
 
@@ -118,8 +120,8 @@ def user_delete_and_confirm(booking_id):
     booking_ref.remove()
     user_cancel_message = message_builder.user_cancel_message(booking_details)
     user_cancel_confirm_message = message_builder.user_cancel_confirm(booking_details)
-    sendmail(mail, user_cancel_message['subject'], 'cynthianfly@gmail.com', ['brainyfarm@gmail.com'], user_cancel_message['html'])
-    sendmail(mail, user_cancel_confirm_message['subject'], 'cynthianfly@gmail.com', [booking_details['email']], user_cancel_confirm_message['html'])
+    sendmail(mail, user_cancel_message['subject'], 'findgym2@gmail.com', [gyms_email_address], user_cancel_message['html'])
+    sendmail(mail, user_cancel_confirm_message['subject'], 'findgym2@gmail.com', [booking_details['email']], user_cancel_confirm_message['html'])
     return render_template('confirm_delete.html', booking_details=booking_details)
 
 @app.route('/session/gym_cancel/<booking_id>')
@@ -130,8 +132,8 @@ def gym_delete_and_confirm(booking_id):
     booking_ref.remove()
     gym_cancel_message = message_builder.gym_cancel_message(booking_details)
     gym_cancel_confirm_message = message_builder.gym_cancel_confirm(booking_details)
-    sendmail(mail, gym_cancel_message['subject'], 'cynthianfly@gmail.com', [booking_details['email']], gym_cancel_message['html'])
-    sendmail(mail, gym_cancel_confirm_message['subject'], 'cynthianfly@gmail.com', ['brainyfarm@gmail.com'], gym_cancel_confirm_message['html'])
+    sendmail(mail, gym_cancel_message['subject'], 'findgym2@gmail.com', [booking_details['email']], gym_cancel_message['html'])
+    sendmail(mail, gym_cancel_confirm_message['subject'], 'findgym2@gmail.com', [gyms_email_address], gym_cancel_confirm_message['html'])
     return render_template('confirm_delete.html', booking_details = booking_details)
 if __name__ == "__main__":
     app.run(debug=True)
