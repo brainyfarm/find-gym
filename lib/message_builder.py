@@ -1,15 +1,18 @@
+from lib import calendar_link_builder
+
 def user_message(booking_details):
     message = {}
     message['html'] = ''
     message_subject = 'Gym Finder: Booking Confirmation'
-
+    
     message_html = 'Hello <strong>' + booking_details['name'] + '</strong>, <br /> <br />'
     message_html += 'You have scheduled a gym session and here details of your booking <br />'
     message_html += '<span> Gym Name: </span> <strong>' + booking_details['gym'] + '</strong> <br />'
     message_html += '<span> Scheduled Time: </span>' + '<strong> ' + booking_details['date_time'] + '</strong> <br /> <br />'
     message_html += '<a href="http://localhost:5000/session/confirm/' + str(booking_details['id_string']) + '\"' + '> View Booking </a> <br />'
+    message_html += '<a href="'+ calendar_link_builder.build_link(booking_details) + '\"' + '> Add to Calendar </a> <br />'
     message_html += '<a href="http://localhost:5000/session/user_cancel/' + str(booking_details['id_string']) + '\"' + '> Cancel Booking </a>'
-
+   
     message['subject'] = message_subject
     message['html'] = message_html
 

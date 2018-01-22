@@ -45,7 +45,6 @@ def sendmail(mail, msg_subject, msg_sender, msg_recipients, message_html):
 
 @app.route('/')
 def home_page():
-    #print message_builder.user_message()
     return 'Nothing Here for now'
 
 @app.route('/gym')
@@ -86,6 +85,7 @@ def gym_info(place_id):
         booking_details = dict()
         booking_details['id'] = int(new_booking_id)
         booking_details['gym'] = request.form["gym"]
+        booking_details['address'] = request.form["address"]
         booking_details['name'] = request.form["name"]
         booking_details['phone_number'] = request.form["phone"]
         booking_details['email'] = request.form['email']
