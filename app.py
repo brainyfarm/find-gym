@@ -64,6 +64,20 @@ def find_gyms():
         places_response = requests.get(places_search_url).json()
         return render_template('gyms.html', gyms=places_response)
 
+@app.route('/gym/tools', methods=["GET"])
+def list_tools():
+    all_tools = requests.get('https://api.myjson.com/bins/r4kxh').json()
+    page_one = [tool for tool in all_tools if(tool['id'] <= 16)]
+    next_page = 2
+    return render_template('equipment.html', tools = page_one, next_page = next_page)
+
+
+@app.route('/gym/tools/<page_id>', methods=["GET"])
+def list_tool_next_page(page_id):
+    all_tools = requests.get('https://api.myjson.com/bins/r4kxh').json()
+    page_two = [tool for tool in all_tools if(tool['id'] >= 17)]
+    return render_template('equipment.html', tools = page_two)
+
 @app.route('/gym/more/<place_id>', methods=["GET", "POST"])
 def gym_info(place_id):
     if request.method == 'GET':
