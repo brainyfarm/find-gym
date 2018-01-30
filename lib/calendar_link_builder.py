@@ -1,4 +1,5 @@
 def get_google_calendar_time(time_string):
+  print time_string
   from datetime import *
   split_time_list = time_string.split(' ')
   split_date_list = split_time_list[0].split('-')

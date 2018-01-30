@@ -8,15 +8,15 @@
 <center>
   {% if gym %}
     <br /> <br />
-  <h2 class="text-center"> {{ gym['result']["name"]}} </h2>
+  <h2 class="text-center"> {{ gym['result']["name"] }} </h2>
   <div class="row">
     <center>
     <div class="col-lg-12 col-sm-8 wow fadeInUp delay-05s" id="">
       <h3></h3>
       <div id="map" style="height: 400px; width:80%;"></div>
       <script>
-        const latitude = parseFloat("{{gym['result']['geometry']['location']['lat']}}");
-        const longitude = parseFloat("{{gym['result']['geometry']['location']['lng']}}");        
+        const latitude = parseFloat("{{ gym['result']['geometry']['location']['lat'] }}");
+        const longitude = parseFloat("{{ gym['result']['geometry']['location']['lng'] }}");        
         function drawMap(lat, lng) {
           var center = { lat, lng };
           var map = new google.maps.Map(document.getElementById('map'), {
@@ -56,12 +56,12 @@
                     </div>
                     <div class="contact-info-box phone clearfix">
                       <h3><i class="fa-phone"></i>Phone:</h3>
-                      <span id="gym-phone">{{ gym['result']['formatted_phone_number']}}</span>
+                      <span id="gym-phone">{{ gym['result']['formatted_phone_number'] }}</span>
                     </div>
                     {% if gym['result']['website'] %}
                     <div class="contact-info-box email clearfix">
                       <h3><i class="fa-globe"></i>Website:</h3>
-                      <span > <a href="{{gym['result']['website']}}" target="_blank"> {{ gym['result']['website'] }} </a></span>
+                      <span > <a href="{{ gym['result']['website'] }}" target="_blank"> {{ gym['result']['website'] }} </a></span>
                     </div>
                     {% endif %}
 
@@ -108,7 +108,7 @@
 								<div class="validation"></div>
 							</div>
 							<div class="form-group input-group datetime" id="datetime">
-								<input type="text" class="form-control input-text" name="date_time" id="time" placeholder="Appointment Date and Time" />
+								<input type="text" class="form-control input-text" data-date-format="DD-MM-YYYY hh:mm A" name="date_time" id="time" placeholder="Appointment Date and Time" />
                 <div class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                  </div>
@@ -116,7 +116,7 @@
               <script>
                   $(function () {
                       $('#datetime').datetimepicker({
-                        format: 'DD-MM-YYYY HH:mm A'
+                        format: 'DD-MM-YYYY hh:mm A'
                       });
                     });
                 </script>

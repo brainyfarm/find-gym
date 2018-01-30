@@ -71,7 +71,6 @@ def list_tools():
     next_page = 2
     return render_template('equipment.html', tools = page_one, next_page = next_page)
 
-
 @app.route('/gym/tools/<page_id>', methods=["GET"])
 def list_tool_next_page(page_id):
     all_tools = requests.get('https://api.myjson.com/bins/r4kxh').json()
