@@ -40,7 +40,7 @@
                     <tbody>
                         {% for gym in gyms["results"] %}
                     <tr>
-                        <th scope="row"> {{ gym["name"] | upper }} </th>
+                        <th scope="row"> {{ gym["name"] }} </th>
                         <td> {{ gym["vicinity"] | upper }} </td>
                         <td>
                                 {% if gym["opening_hours"] %} 

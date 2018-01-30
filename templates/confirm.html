@@ -15,7 +15,7 @@
                         <div class="contact-info-box phone clearfix">                                
                                 <h3>
                                     <i class="fa-user"></i>Name:</h3>
-                                <span> {{ booking_details['name'].upper()}} </span>
+                                <span> {{ booking_details['name'] }} </span>
                         </div>
 
 
@@ -27,7 +27,7 @@
                     <div class="contact-info-box email clearfix">
                         <h3>
                             <i class="fa-pencil"></i>email:</h3>
-                        <span> {{ booking_details['email'].upper()}} </span>
+                        <span> {{ booking_details['email'] | lower }} </span>
                     </div>
 
                     <div class="contact-info-box hours clearfix">
@@ -64,7 +64,7 @@
             }
 
             .print-btn {
-                margin-left: 10px;
+                margin-left: 30px;
             }
 
             .back-btn {
