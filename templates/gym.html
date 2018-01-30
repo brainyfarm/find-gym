@@ -88,24 +88,24 @@
               <h2> Book a Session </h2>              
 						<form action="" method="POST" role="form" class="">
 							<div class="form-group">
-                <input type="text" name="gym" id="gym" value="{{ gym['result']['name'] }}" style="display:none">
+                <input type="text" name="gym" id="gym" value="{{ gym['result']['name'] }}" style="display:none" required>
                 <input type="text" name="address" id="address" value="{{ gym['result']['formatted_address'] }}" style="display:none">
 
                 
 
-								<input type="text" name="name" class="form-control input-text" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+								<input type="text" name="name" class="form-control input-text" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required />
 								<div class="validation"></div>
               </div>
               <div class="form-group">
-                  <input type="text" class="form-control input-text" name="phone" id="phone" placeholder="Phone Number" data-rule="phone" data-msg="Please enter a valid Phone" />
+                  <input type="text" class="form-control input-text" name="phone" id="phone" placeholder="Phone Number" data-rule="phone" data-msg="Please enter a valid Phone" required/>
                   <div class="validation"></div>
                 </div>
 							<div class="form-group">
-								<input type="email" class="form-control input-text" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+								<input type="email" class="form-control input-text" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" required/>
 								<div class="validation"></div>
 							</div>
 							<div class="form-group input-group datetime" id="datetime">
-								<input type="text" class="form-control input-text" data-date-format="DD-MM-YYYY hh:mm A" name="date_time" id="time" placeholder="Appointment Date and Time" />
+								<input type="text" class="form-control input-text" data-date-format="DD-MM-YYYY hh:mm A" name="date_time" id="time" placeholder="Appointment Date and Time" required />
                 <div class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                  </div>
