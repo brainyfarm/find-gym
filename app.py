@@ -96,6 +96,7 @@ def gym_info(place_id):
         booking_id_string = hashids.encode(new_booking_id)
         booking_confirm_url = 'session/confirm/' + booking_id_string
         booking_details = dict()
+        print request.form
         booking_details['id'] = int(new_booking_id)
         booking_details['gym'] = request.form["gym"]
         booking_details['address'] = request.form["address"]
@@ -104,6 +105,8 @@ def gym_info(place_id):
         booking_details['email'] = request.form['email']
         booking_details['date_time'] = request.form['date_time']
         booking_details['id_string'] = booking_id_string
+        print "we are here"
+        print booking_details
         new_booking_ref.set(booking_details)
         user_message = message_builder.user_message(booking_details)
         gym_message = message_builder.gym_message(booking_details)

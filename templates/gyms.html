@@ -1,27 +1,9 @@
 {% extends 'base.html' %} {% block title %} Gyms {% endblock %} {% block content %}
-<!-- <ul class="list-group" id="gym-list">
-    {% for gym in gyms["results"] %}
-            <li class="list-group-item">
-                <div class="gym-item {{gym['place_id']}}"> 
-                        <div class="media-left">
-
-                              </div>
-                    <h2 class="text-left text-primary"> <a href='/gym/more/{{gym["place_id"]}}'> {{ gym["name"] }} </a></h2>
-                    <h3> {{ gym["vicinity"] }}</h3>
-                    {% if gym["opening_hours"] %} 
-                        {% if gym['opening_hours']['open_now'] %}
-                            <p class="text-success"> CURRENTLY OPEN </p>
-                        {% endif %}
-                    {% endif %}
-                    <a href='/gym/more/{{gym["place_id"]}}' class="btn btn-info"> More Info </a>
-                </div>
-            </li>
-        </ul>
-    {% endfor %}
-            </ul> -->
 <br />
 <div class="col">
-    <h2 style="text-transform: capitalize !important" class="text-center"> Nearby Gyms </h2>
+    <br />
+    <br />
+        <h2 style="text-transform: capitalize !important" class="text-center"> Nearby Gyms </h2>
     <table class="table table-striped table-lg">
         <thead class="thead thead-dark">
             <tr>
@@ -40,8 +22,8 @@
         <tbody>
             {% for gym in gyms["results"] %}
             <tr>
-                <th scope="row"> {{ gym["name"] }} </th>
-                <td class="text-left"> {{ gym["vicinity"] | upper }} </td>
+                <td scope="row"> {{ gym["name"] }} </td>
+                <td class="text-left"> {{ gym["vicinity"] }} </td>
                 <td class="text-center">
                     <a href="#">
                         {% if gym["opening_hours"] %} {% if gym['opening_hours']['open_now'] %}
@@ -50,16 +32,16 @@
                         {% else %}
                         <!-- <p class="text-warning"> CURRENTLY CLOSED </p> -->
                         <span class="glyphicon glyphicon-ban-circle text-danger status" style="font-size: 30px" title="Currently Closed"></span>
-                        {% endif %} {% else %}
+                        {% endif %} {% else %} 
                         <!-- <p class="text-danger"> STATUS UNKNOWN  </p> -->
                         <span class="glyphicon glyphicon-question-sign text-warning status" style="font-size: 30px" title="Status Unknown"></span>
                         {% endif %}
                     </a>
                 </td>
                 <td>
-                    <a href="/gym/more/{{gym['place_id']}}" class="btn btn-info">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                            More
+                    <a href="/gym/more/{{gym['place_id']}}" class="link btn btn-info btn-sm" style="font-size: 14px; padding: 2px 15px; margin-bottom: 0px;">
+                                                  
+                            <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
                 </td>
             </tr>

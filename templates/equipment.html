@@ -1,5 +1,8 @@
  {% extends 'base.html' %} {% block title %} Gyms {% endblock %} {% block content %}
 <style>
+    .btn-small {
+        padding: 5px 10px;
+    }
     .glyphicon {
         margin-right: 5px;
     }
@@ -64,11 +67,19 @@
         margin: 0 0 11px;
         overflow-wrap: normal;
         font-family: 'Helvetica Neue', sans-serif;
-        font-size: 14px;
+        font-size: 18px;
         line-height: 24px;
         margin: 0 0 24px;
         text-align: justify;
         text-justify: inter-word;
+    }
+
+    .list-group-item-heading {
+        font-size: 25px !important;
+    }
+
+    .title-text {
+        text-transform: capitalize !important;
     }
 </style>
 
@@ -80,8 +91,11 @@
 </script>
 
 <div class="container">
-    <br />
-        <h2 class="text-center"> GYM EQUIPMENT </h2>
+        <br />
+        <br />
+        <h2 class="text-center title-text">Gym Equipment  </h2>
+        <br />
+        <br />
     <div id="products" class="row list-group">
         {% for tool in tools %}
         <div class="item  col-xs-6 col-lg-6">
@@ -117,15 +131,15 @@
 
     <center> 
         {% if next_page %}
-                <a class="btn btn-default" href="/gym/tools/{{ next_page }}">
-                    PAGE {{ next_page }}                    
-                    <span class="glyphicon glyphicon-chevron-right"></span>
+                <a class="link btn btn-default btn-small" href="/gym/tools/{{ next_page }}">
+                    NEXT                 
+                    <span class="glyphicon glyphicon-forward"></span>
 
                 </a>
             {% else %}
-                <a class="btn btn-default" href="/gym/tools">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    PAGE 1
+                <a class="link btn btn-success btn-small" href="/gym/tools">
+                    <span class="glyphicon glyphicon-backward"></span>
+                    BACK
                 </a>
         {% endif %}
     </center>
